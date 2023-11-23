@@ -3,12 +3,17 @@ const initialState = []
 
 //Todo: Definiendo el reducer del hook userReducer
 export const heroesReducer = ( state = initialState, action = {} ) => {
-    if (action.type === '[ADD] Heroes'){
-        return [
-            ...state,
-            action.payload
-        ]
+    switch(action.type){
+        case '[ADD] Heroes':
+            return [
+                ...state,
+                action.payload
+            ]
+        case '[DELETE] heroes':
+            
+        break;
     }
+
     return state    
 }
 
