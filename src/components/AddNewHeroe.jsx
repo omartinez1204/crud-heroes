@@ -1,6 +1,6 @@
 import { useForm } from "../hooks/useForm"
 
-export const AddNewHeroe = () => {
+export const AddNewHeroe = ( { addNewHeroe } ) => {
 
     const {nombre, poder, onInputChange, resetForm } = useForm({
         nombre: '',
@@ -9,13 +9,14 @@ export const AddNewHeroe = () => {
 
     const onFormSubmit = (event)=>{
         event.preventDefault()
+        if (nombre.length<=1 || poder.length<=1) return;
+
         const newHeroe = {
             id: new Date().getTime(),
             nombre,
             poder,
         }
-        //todo: mandar el nuevo heroe al reducer
-        console.log(newHeroe)
+        addNewHeroe(newHeroe)
         resetForm({nombre:'', poder:''})
     }
     

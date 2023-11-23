@@ -2,28 +2,31 @@ import { useReducer } from 'react'
 import { heroesReducer } from './hooks/heroesReducer'
 import { AddNewHeroe, ListHeroes } from './components'
 
-const initialState = [{
-    id: new Date().getTime(),
-    name: 'Batman',
-    poder: 'Tiene mucho Dinero'
-},
-{
-    id: new Date().getTime() * 3,
-    name: 'Superman',
-    poder: 'fuerza, volar, laser, congeladora, super ojos, super oidos'
-},
-]
+const initialState = []
 
 export const HeroesApp = () => {
     const [heroes, dispatch] = useReducer(heroesReducer, initialState)
+
+    const addNewHeroe = ( newHeroe )=>{
+        const actionHeroe = {
+            type: '[ADD] Heroes',
+            payload: newHeroe
+        }
+        dispatch(actionHeroe)
+    }
+
     return (
         <>
             <div className='container row'>
                 <div className="col-5">
-                    <ListHeroes listHeroes={heroes}/>
+                    {
+                        heroes.length ===0 
+                        ? <h3>No Heroes yet</h3>
+                        : <ListHeroes listHeroes={heroes}/>
+                    }
                 </div>
                 <div className='col-7'>
-                    <AddNewHeroe/>
+                    <AddNewHeroe addNewHeroe={ addNewHeroe }/>
                 </div>
             </div>
         </>
